@@ -28,7 +28,7 @@ function autofill() {
 }
 
 function fetchAndPopulate() {
-  $.ajax('/api/task').done(function(response, textStatus, request) {
+  $.ajax('{{ url_for('get_task') }}').done(function(response, textStatus, request) {
     console.log(request.getResponseHeader('Task'))
     console.log(response)
 
@@ -52,7 +52,7 @@ function save() {
     return;
   }
 
-  $.post('/api/save', JSON.stringify({
+  $.post('{{ url_for('save') }}', JSON.stringify({
     source: taskSource,
     page: title,
     trans: engTranslation
