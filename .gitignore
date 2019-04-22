@@ -1,0 +1,6 @@
+__pycache__
+config.yaml
+apicache-py3
+google_translation_en_cache
+pywikibot.lwp
+throttle.ctrl

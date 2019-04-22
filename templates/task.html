@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block main %}
+
+<h2 id="title">Loading</h2>
+<img id="image" alt="...Loading Image..." src=""/>
+
+<p><b>Beskrivning:</b> <span id="desc"></span></p>
+<div class="form-group">
+  <label>
+    Engelska: <input id="translation" class="form-control" type="text" style="width:300%" placeholder="your description translation"/>
+  </label><br>
+  <button class="btn btn-primary" onclick="autofill()">Autofill</button>
+  <button class="btn btn-primary" onclick="save()">Spara</button>
+</div>
+<script>
+let taskSource;
+let title;
+let pageid;
+
+let autofillValue;
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
+
+function autofill() {
+  document.querySelector('#translation').value = autofillValue;
+}
+
+function fetchAndPopulate() {
+  $.ajax('/api/task').done(function(response, textStatus, request) {
+    console.log(request.getResponseHeader('Task'))
+    console.log(response)
+
+    taskSource = request.getResponseHeader('Task');
+    title = response.title;
+
+    document.querySelector('#title').innerText = response.title.replaceAll('_', ' ').replace('File:', '');
+    document.querySelector('#image').src = ''; // clear to avoid showing wrong image
+    document.querySelector('#image').src = response.thumbnail;
+    document.querySelector('#desc').innerText = response.desc;
+
+    autofillValue = response.auto_desc.translatedText;
+    document.querySelector('#translation').value = '';
+  });
+}
+
+function save() {
+  let engTranslation = document.querySelector('#translation').value;
+  if (engTranslation <= 10) {
+    console.log('toshort');
+    return;
+  }
+
+  $.post('/api/save', JSON.stringify({
+    source: taskSource,
+    page: title,
+    trans: engTranslation
+  })).done(function(response) {
+    console.log(response);
+    fetchAndPopulate();
+  });
+}
+
+fetchAndPopulate();
+</script>
+
+{% endblock %}

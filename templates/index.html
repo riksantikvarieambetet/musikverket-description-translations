@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block main %}
+
+<h1>Hjälp till att översätta bildbeskrivningar från Musikverket</h1>
+<p>Musikverket behöver din hjälp med att översätta beskrivningar av teaterbilder från sent 1800-tal och tidigt 1900-tal. Logga in med ditt Wikipedia/Wikimedia konto för att hjälpa till.</p>
+
+{% if authenticated_session() %}
+<a href="/task" class="btn btn-primary">Starta</a>
+{% else %}
+<a href="/login" class="btn btn-primary">Logga in</a>
+{% endif %}
+
+{% endblock %}
