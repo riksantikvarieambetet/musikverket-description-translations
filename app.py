@@ -186,7 +186,7 @@ def login():
     flask.session['oauth_request_token'] = dict(zip(request_token._fields, request_token))
     return flask.redirect(redirect)
 
-@app.route('/oauth-callback')
+@app.route('/auth-callback')
 def oauth_callback():
     request_token = mwoauth.RequestToken(**flask.session.pop('oauth_request_token'))
     access_token = mwoauth.complete('https://commons.wikimedia.org/w/index.php', consumer_token, request_token, flask.request.query_string, user_agent=user_agent)
