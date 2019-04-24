@@ -1,17 +1,90 @@
 {% extends "base.html" %}
 {% block main %}
 
-<h2 id="title">Loading</h2>
-<img id="image" alt="...Loading Image..." src=""/>
 
-<p><b>Beskrivning:</b> <span id="desc"></span></p>
-<div class="form-group">
-  <label>
-    Engelska: <input id="translation" class="form-control" type="text" style="width:300%" placeholder="your description translation"/>
-  </label><br>
-  <button class="btn btn-primary" onclick="autofill()">Autofill</button>
-  <button class="btn btn-primary" onclick="save()">Spara</button>
+<img id="image" alt="...Loading Image..." src="">
+<div class="descriptions">
+    <h2 id="title"></h2>
+    <p><b>Beskrivning:</b> <span id="desc"></span></p>
+    <div class="form-group">
+        <label>
+            Engelska: <input id="translation" class="form-control" type="text" style="" placeholder="your description translation">
+        </label><br>
+        <button class="btn btn-primary" onclick="autofill()">Utgå från Google Translate</button>
+        <button class="btn btn-primary" onclick="fetchAndPopulate()">Hoppa över</button>
+        <button class="btn btn-primary" onclick="save()">Spara</button>
+    </div>
 </div>
+
+<style>
+  body {
+      display: flex;
+      flex-direction: column;
+  }
+
+  h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+  }
+
+  .navbar {
+      justify-content: space-between;
+      flex: 0 1 auto;
+  }
+
+  .container {
+      max-width: unset;
+      display: flex;
+      padding: 0 1rem;
+      flex: 1 1 auto;
+  }
+
+  img {
+      object-fit: contain;
+  }
+
+  label {
+      display: inline-block;
+      margin-bottom: .5rem;
+      width: 100%;
+  }
+
+  @media all and (max-width: 800px) {
+
+      .container {
+          flex-direction: column;
+      }
+
+      img {
+          max-height: 50%;
+          object-position: 50% 0;
+          width: 100%;
+      }
+
+      .descriptions {
+          width: 100%;
+          padding-top: 1rem;
+      }
+  }
+
+  @media all and (min-width: 801px) {
+
+      .container {
+          flex-direction: row;
+      }
+
+      img {
+          max-height: 100%;
+          max-width: 50%;
+          object-position: 0 0;
+          padding-right: 1rem;
+      }
+
+      .descriptions {
+      }
+  }
+</style>
+
 <script>
 let taskSource;
 let title;
