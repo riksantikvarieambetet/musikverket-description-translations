@@ -9,5 +9,27 @@
 {% else %}
 <a href="{{ url_for('login') }}" class="btn btn-primary">Logga in</a>
 {% endif %}
+<br><br>
+<div class="container">
+    <div class="row imagetiles">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Anders_de_Wahl_in_Erotikon_at_Dramatiska_teatern_1909_-_SMV_-_NV009.tif/lossy-page1-177px-Anders_de_Wahl_in_Erotikon_at_Dramatiska_teatern_1909_-_SMV_-_NV009.tif.jpg" class="img-responsive">
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Axel_Ringvall_in_Ambassad%C3%B6ren_at_Oscarsteatern_1907_-_SMV_-_NR050.tif/lossy-page1-176px-Axel_Ringvall_in_Ambassad%C3%B6ren_at_Oscarsteatern_1907_-_SMV_-_NR050.tif.jpg" class="img-responsive">
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Carl_Barcklind_in_Fortunas_gunstling_at_Oscarsteatern_1909_-_SMV_-_NB012.tif/lossy-page1-175px-Carl_Barcklind_in_Fortunas_gunstling_at_Oscarsteatern_1909_-_SMV_-_NB012.tif.jpg" class="img-responsive">
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Anna_Rustan_and_Carl_Barcklind_in_Min_toreador_at_Djurg%C3%A5rdsteatern_1905_-_SMV_-_NB034.tif/lossy-page1-174px-Anna_Rustan_and_Carl_Barcklind_in_Min_toreador_at_Djurg%C3%A5rdsteatern_1905_-_SMV_-_NB034.tif.jpg" class="img-responsive">
+        </div>
+    </div>
+</div>
 
+<style>
+div.imagetiles div.col-lg-3.col-md-3.col-sm-3.col-xs-6{
+  padding: 0px;
+}
+</style>
 {% endblock %}
