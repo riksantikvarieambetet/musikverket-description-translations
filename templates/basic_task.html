@@ -5,7 +5,6 @@
     <div class="progress-bar" id="progressbar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">Framsteg</div>
 </div>
 
-    <img id="image" alt="...Loading Image..." src="">
     <div class="descriptions">
         <h2 id="title"></h2>
         <p><b>Beskrivning:</b> <span id="desc"></span></p>
@@ -15,8 +14,7 @@
             </label><br>
             <button class="btn btn-primary" onclick="autofill()">Utgå från Google Translate</button>
             <button class="btn btn-primary" onclick="fetchAndPopulate()">Hoppa över</button>
-            <button class="btn btn-primary" onclick="save()">Spara</button><br><br>
-            <a href="{{ url_for('basic_task') }}">Går det långsamt? Redigera utan bild.</a>
+            <button class="btn btn-primary" onclick="save()">Spara</button>
         </div>
     </div>
 <style>
@@ -42,10 +40,6 @@
       flex: 1 1 auto;
   }
 
-  img {
-      object-fit: contain;
-  }
-
   label {
       display: inline-block;
       margin-bottom: .5rem;
@@ -58,12 +52,6 @@
           flex-direction: column;
       }
 
-      img {
-          max-height: 50%;
-          object-position: 50% 0;
-          width: 100%;
-      }
-
       .descriptions {
           width: 100%;
           padding-top: 1rem;
@@ -74,13 +62,6 @@
 
       .container {
           flex-direction: row;
-      }
-
-      img {
-          max-height: 100%;
-          max-width: 50%;
-          object-position: 0 0;
-          padding-right: 1rem;
       }
 
       .descriptions {
@@ -116,8 +97,6 @@ function fetchAndPopulate() {
     title = response.title;
 
     document.querySelector('#title').innerText = response.title.replaceAll('_', ' ').replace('File:', '');
-    document.querySelector('#image').src = ''; // clear to avoid showing wrong image
-    document.querySelector('#image').src = response.thumbnail;
     document.querySelector('#desc').innerText = response.desc;
 
     autofillValue = response.auto_desc.translatedText;

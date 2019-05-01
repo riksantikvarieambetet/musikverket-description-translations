@@ -108,6 +108,10 @@ def task():
     else:
         return flask.redirect('/login')
 
+@app.route('/basic-task')
+def basic_task():
+    return flask.render_template('basic_task.html')
+
 @app.route('/api/task')
 def get_task():
     available = os.listdir(os.path.join(__dir__ + '/jsonfiles'))
