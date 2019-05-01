@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block main %}
+
+<h1>Topplista</h1>
+<p>Användare / antal redigeringar</p>
+<ul id="list">...laddar...</ul>
+
+<div class="container"></div>
+<script>
+
+$.ajax('https://commons.wikimedia.org/w/api.php?action=query&list=recentchanges&format=json&rctag=OAuth+CID%3A+1314&rclimit=500&rcprop=user&origin=*').done(data => {
+    let users = [];
+    data.query.recentchanges.forEach(obj => {
+        users.push(obj.user);
+    });
+
+    result = { };
+    for(var i = 0; i < users.length; ++i) {
+        if(!result[users[i]])
+            result[users[i]] = 0;
+        ++result[users[i]];
+    }
+
+    result = Object.entries(result).sort((a,b) => (b[1] > a[1] ? 1 : -1));
+
+    result.forEach(user => {
+        let li = document.createElement('li');
+        let text = document.createTextNode(user[0] + ': ' + user[1])
+        li.appendChild(text)
+        document.querySelector('#list').appendChild(li);
+    });
+});
+</script>
+
+{% endblock %}

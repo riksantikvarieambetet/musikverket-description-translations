@@ -97,6 +97,10 @@ def authenticated_session():
 def index():
     return flask.render_template('index.html')
 
+@app.route('/leaderboard')
+def leaderboard():
+    return flask.render_template('leaderboard.html')
+
 @app.route('/task')
 def task():
     if authenticated_session():

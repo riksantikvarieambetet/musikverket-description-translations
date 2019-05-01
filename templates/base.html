@@ -14,6 +14,7 @@
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
       <a href="{{ url_for('index') }}" class="navbar-brand">Musikverket</a>
       {{ authentication_area() }}
+      <a href="{{ url_for('leaderboard') }}" class="navbar-text" style="margin-left: 5px;">Topplista</a>
     </nav>
     <main class="container mt-3">
       {% block main %}
