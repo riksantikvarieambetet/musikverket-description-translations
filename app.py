@@ -112,6 +112,7 @@ def get_task():
     with open(os.path.join(__dir__ + '/jsonfiles', task)) as task_file:
         resp = flask.Response(json.dumps(json.load(task_file)), status=200, mimetype='application/json')
     resp.headers['Task'] = str(task)
+    resp.headers['Progress'] = str(progress())
     return resp
 
 @app.route('/api/save', methods=['POST'])
@@ -238,3 +239,7 @@ def deny_frame(response):
     """
     response.headers['X-Frame-Options'] = 'deny'
     return response
+
+def progress():
+    n_tasks = len(os.listdir(__dir__ + '/jsonfiles'))
+    return 100 - (100 * float(n_tasks)/1281)

@@ -1,21 +1,23 @@
 {% extends "base.html" %}
 {% block main %}
 
-
-<img id="image" alt="...Loading Image..." src="">
-<div class="descriptions">
-    <h2 id="title"></h2>
-    <p><b>Beskrivning:</b> <span id="desc"></span></p>
-    <div class="form-group">
-        <label>
-            Engelska: <input id="translation" class="form-control" type="text" style="" placeholder="your description translation">
-        </label><br>
-        <button class="btn btn-primary" onclick="autofill()">Utgå från Google Translate</button>
-        <button class="btn btn-primary" onclick="fetchAndPopulate()">Hoppa över</button>
-        <button class="btn btn-primary" onclick="save()">Spara</button>
-    </div>
+<div class="progress" style="width: 97%; position: absolute; bottom: 5px;">
+    <div class="progress-bar" id="progressbar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">Framsteg</div>
 </div>
 
+    <img id="image" alt="...Loading Image..." src="">
+    <div class="descriptions">
+        <h2 id="title"></h2>
+        <p><b>Beskrivning:</b> <span id="desc"></span></p>
+        <div class="form-group">
+            <label>
+                Engelska: <input id="translation" class="form-control" type="text" style="" placeholder="your description translation">
+            </label><br>
+            <button class="btn btn-primary" onclick="autofill()">Utgå från Google Translate</button>
+            <button class="btn btn-primary" onclick="fetchAndPopulate()">Hoppa över</button>
+            <button class="btn btn-primary" onclick="save()">Spara</button>
+        </div>
+    </div>
 <style>
   body {
       display: flex;
@@ -106,6 +108,10 @@ function fetchAndPopulate() {
     console.log(response)
 
     taskSource = request.getResponseHeader('Task');
+
+    console.log(request.getResponseHeader('Progress'));
+    document.querySelector('#progressbar').style.width = request.getResponseHeader('Progress') + '%';
+
     title = response.title;
 
     document.querySelector('#title').innerText = response.title.replaceAll('_', ' ').replace('File:', '');
